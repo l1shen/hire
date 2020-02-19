@@ -17,7 +17,6 @@ interface stackItem {
 export function parseError(err: Error): ErrorMessage {
   if (!err || !err.stack) throw new Error('error not stack')
   const errorList: Array<string> = err.stack.split('\n')
-  if (!errorList || errorList.length < 0) throw new Error('parse error faild')
   const message = errorList.shift() || ''
   const stack = errorList.map(item => parseItem(item)).filter((x): x is stackItem => x !== null)
   return {message, stack}
