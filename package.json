@@ -9,7 +9,7 @@
   "scripts": {
     "build": "shx rm -rf lib && tsc -p tsconfig.json --outDir lib",
     "lint": "eslint src --fix --ext .ts,.tsx ",
-    "test": "ava"
+    "test": "build && ava"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
