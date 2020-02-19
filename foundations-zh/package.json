@@ -7,13 +7,48 @@
   "author": "lynweklm@gmail.com",
   "license": "MIT",
   "scripts": {
-    "build": "shx rm -rf lib && tsc -p tsconfig.json --outDir lib"
+    "build": "shx rm -rf lib && tsc -p tsconfig.json --outDir lib",
+    "lint": "eslint src --fix --ext .ts,.tsx ",
+    "test": "ava"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "ava": "^3.3.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "esm": "^3.2.25",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.7",
+    "prettier": "^1.19.1",
     "shx": "^0.3.2",
     "typescript": "^3.6.2"
   },
   "dependencies": {
     "tslib": "^1.10.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "npm run eslint",
+      "prettier .prettierrc.js --write",
+      "git add"
+    ]
+  },
+  "ava": {
+    "files": [
+      "tests/*.test.js"
+    ],
+    "require": [
+      "esm"
+    ]
   }
 }
