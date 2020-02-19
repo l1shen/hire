@@ -31,8 +31,9 @@ function parseItem(item: string): stackItem | null {
 
 function parseBlock(block: string): stackItem {
   const elements = block.split(':')
-  const line = parseInt(elements[elements.length - 2])
-  const column = parseInt(elements[elements.length - 1])
+  const length = elements.length
+  const line = parseInt(elements[length - 2])
+  const column = parseInt(elements[length - 1])
   const filename = [elements[0], elements[1], elements[2]].join(':')
   return {line, column, filename}
 }
